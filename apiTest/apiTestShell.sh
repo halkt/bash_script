@@ -1,4 +1,5 @@
 #!/bin/bash
+set -Ceu
 
 ##############################################################################
 # APIの検証をテストするためのbashスクリプト
@@ -18,12 +19,12 @@ for v in "${urlList[@]}"; do
   response=$(curl -sL $v)
   if [[ ${response} == *XML* ]]; then
     echo "[OK]: ${i}行目";
-    let ok_count++
+    ok_count=$((++ok_count));
   else
     echo "[NG]: ${i}行目 「${v}」";
-    let ng_count++
+    ng_count=$((++ng_count));
   fi
-  let i++
+  let i++;
 done
 
 # 結果を出力
